@@ -1,0 +1,10 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Contact.Data.Repository
+{
+    class ContactRepository
+    {
+    }
+}
