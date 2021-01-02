@@ -36,9 +36,9 @@ namespace Contact.Core.Repository
             return await _contactContext.Contacts.ToListAsync(cancellationToken: cancellationToken);
         }
 
-        public async Task<bool> RemoveContact(Contacts model, CancellationToken cancellationToken)
+        public async Task<bool> RemoveContact(Guid contactId, CancellationToken cancellationToken)
         {
-            _contactContext.Contacts.Remove(model);
+            _contactContext.Contacts.Remove(await _contactContext.Contacts.FirstOrDefaultAsync(x => x.UUID == contactId, cancellationToken));
             return await _contactContext.SaveChangesAsync(cancellationToken) > 0;
         }
 
@@ -48,6 +48,6 @@ namespace Contact.Core.Repository
             _contactContext.ContactInformations.Remove(contactInformation);
             return await _contactContext.SaveChangesAsync(cancellationToken) > 0;
         }
-         
+
     }
 }

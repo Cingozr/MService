@@ -10,6 +10,5 @@ namespace Contact.Service.Query.List
 {
     public class GetAllContactQuery : IRequest<List<Contacts>>
     {
-        public List<Contacts> GetAllContact { get; set; }
     }
 }

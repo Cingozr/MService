@@ -28,21 +28,25 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{7E192893-54F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{E84FD076-781A-4678-9815-ADACB585FE3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contact.API", "src\Services\Contact\Api\Contact.API\Contact.API.csproj", "{9E44B496-B6E9-41CF-B2A8-4047CD01319E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contact.API", "src\Services\Contact\Api\Contact.API\Contact.API.csproj", "{9E44B496-B6E9-41CF-B2A8-4047CD01319E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contact.Core", "src\Services\Contact\Core\Contact.Core\Contact.Core.csproj", "{8BFF4392-3890-4C56-AC19-B12F97CEEBB0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contact.Core", "src\Services\Contact\Core\Contact.Core\Contact.Core.csproj", "{8BFF4392-3890-4C56-AC19-B12F97CEEBB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contact.Data", "src\Services\Contact\Core\Contact.Data\Contact.Data.csproj", "{E3F5C39F-8BFF-4B36-AB81-D8839DE87C72}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contact.Data", "src\Services\Contact\Core\Contact.Data\Contact.Data.csproj", "{E3F5C39F-8BFF-4B36-AB81-D8839DE87C72}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contact.Service", "src\Services\Contact\Core\Contact.Service\Contact.Service.csproj", "{12249914-1EEB-4025-BAEF-B532AC745CD2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contact.Service", "src\Services\Contact\Core\Contact.Service\Contact.Service.csproj", "{12249914-1EEB-4025-BAEF-B532AC745CD2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Report.API", "src\Services\Report\Api\Report.API\Report.API.csproj", "{A94AD0CA-D3A9-4901-8126-DCCC24BAB227}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Report.API", "src\Services\Report\Api\Report.API\Report.API.csproj", "{A94AD0CA-D3A9-4901-8126-DCCC24BAB227}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Report.Core", "src\Services\Report\Core\Report.Core\Report.Core.csproj", "{832E3301-9A65-4C1B-B5CE-1C4998437D2F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Report.Core", "src\Services\Report\Core\Report.Core\Report.Core.csproj", "{832E3301-9A65-4C1B-B5CE-1C4998437D2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Report.Data", "src\Services\Report\Core\Report.Data\Report.Data.csproj", "{7C3B5DEC-9C13-4284-BDC4-3305263596F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Report.Data", "src\Services\Report\Core\Report.Data\Report.Data.csproj", "{7C3B5DEC-9C13-4284-BDC4-3305263596F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Report.Service", "src\Services\Report\Core\Report.Service\Report.Service.csproj", "{A11293D7-98E4-4920-8B5C-774F1A10CC58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Report.Service", "src\Services\Report\Core\Report.Service\Report.Service.csproj", "{A11293D7-98E4-4920-8B5C-774F1A10CC58}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{BF8106E7-B30D-4C58-B0EC-01F893AD3D7F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contact.Poco", "src\Services\Contact\Common\Contact.Poco\Contact.Poco.csproj", "{51A82062-45DF-46E7-9441-5AB809DB7016}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -82,6 +86,10 @@ Global
 		{A11293D7-98E4-4920-8B5C-774F1A10CC58}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A11293D7-98E4-4920-8B5C-774F1A10CC58}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A11293D7-98E4-4920-8B5C-774F1A10CC58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51A82062-45DF-46E7-9441-5AB809DB7016}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51A82062-45DF-46E7-9441-5AB809DB7016}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51A82062-45DF-46E7-9441-5AB809DB7016}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51A82062-45DF-46E7-9441-5AB809DB7016}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -104,6 +112,8 @@ Global
 		{832E3301-9A65-4C1B-B5CE-1C4998437D2F} = {D5152965-625E-4BBC-A455-C16C2246895B}
 		{7C3B5DEC-9C13-4284-BDC4-3305263596F4} = {D5152965-625E-4BBC-A455-C16C2246895B}
 		{A11293D7-98E4-4920-8B5C-774F1A10CC58} = {D5152965-625E-4BBC-A455-C16C2246895B}
+		{BF8106E7-B30D-4C58-B0EC-01F893AD3D7F} = {0E9756D8-7B57-44D8-B7F0-7639EC69953C}
+		{51A82062-45DF-46E7-9441-5AB809DB7016} = {BF8106E7-B30D-4C58-B0EC-01F893AD3D7F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {525430A9-BC86-4691-A557-608CD2ABCE08}
