@@ -15,39 +15,97 @@ namespace Contact.Core.Repository
 
         public async Task<bool> AddContact(Contacts model, CancellationToken cancellationToken)
         {
-            await _contactContext.Contacts.AddAsync(model, cancellationToken);
-            return await _contactContext.SaveChangesAsync(cancellationToken) > 0;
+            if (model == null)
+                throw new ArgumentNullException($"{nameof(AddAsync)} entity must not be null");
+
+            try
+            {
+                await _contactContext.Contacts.AddAsync(model, cancellationToken);
+                return await _contactContext.SaveChangesAsync(cancellationToken) > 0;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"{nameof(model)} could not be saved: {ex.Message}");
+            }
+
         }
 
         public async Task<bool> AddContactInformationToPerson(ContactInformations model, CancellationToken cancellationToken)
         {
-            await _contactContext.ContactInformations.AddAsync(model, cancellationToken);
-            return await _contactContext.SaveChangesAsync(cancellationToken) > 0;
-        }
+            if (model == null)
+                throw new ArgumentNullException($"{nameof(AddAsync)} entity must not be null");
 
+            try
+            {
+                await _contactContext.ContactInformations.AddAsync(model, cancellationToken);
+                return await _contactContext.SaveChangesAsync(cancellationToken) > 0;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"{nameof(model)} could not be saved: {ex.Message}");
+            }
+
+        }
 
         public async Task<List<Contacts>> GetAllContactInformation(CancellationToken cancellationToken)
         {
-            return await _contactContext.Contacts.Include(x => x.ContactInformations).ToListAsync(cancellationToken: cancellationToken);
+            try
+            {
+                return await _contactContext.Contacts.Include(x => x.ContactInformations).ToListAsync(cancellationToken: cancellationToken);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"{nameof(GetAllContactInformation)} {ex.Message}");
+            }
+
         }
 
         public async Task<List<Contacts>> GetAllContact(CancellationToken cancellationToken)
         {
-            return await _contactContext.Contacts.ToListAsync(cancellationToken: cancellationToken);
+            try
+            {
+                return await _contactContext.Contacts.ToListAsync(cancellationToken: cancellationToken);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"{nameof(GetAllContact)} { ex.Message}");
+            }
+
         }
 
-        public async Task<bool> RemoveContact(Contacts model, CancellationToken cancellationToken)
+        public async Task<bool> RemoveContact(Guid contactId, CancellationToken cancellationToken)
         {
-            _contactContext.Contacts.Remove(model);
-            return await _contactContext.SaveChangesAsync(cancellationToken) > 0;
+            if (contactId == Guid.Empty)
+                throw new ArgumentNullException($"{nameof(RemoveContact)} contactId must not be null");
+
+            try
+            {
+                _contactContext.Contacts.Remove(await _contactContext.Contacts.FirstOrDefaultAsync(x => x.UUID == contactId, cancellationToken));
+                return await _contactContext.SaveChangesAsync(cancellationToken) > 0;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"{nameof(RemoveContact)} : {ex.Message}");
+            }
+
         }
 
-        public async Task<bool> RemoveContactInformationToPerson(Guid id, CancellationToken cancellationToken)
+        public async Task<bool> RemoveContactInformationToPerson(Guid contactId, CancellationToken cancellationToken)
         {
-            var contactInformation = await _contactContext.ContactInformations.FirstOrDefaultAsync(x => x.ContactId == id, cancellationToken);
-            _contactContext.ContactInformations.Remove(contactInformation);
-            return await _contactContext.SaveChangesAsync(cancellationToken) > 0;
+            if (contactId == Guid.Empty)
+                throw new ArgumentNullException($"{nameof(RemoveContactInformationToPerson)} contactId must not be null");
+
+            try
+            {
+                _contactContext.ContactInformations.Remove(await _contactContext.ContactInformations.FirstOrDefaultAsync(x => x.ContactId == contactId, cancellationToken));
+                return await _contactContext.SaveChangesAsync(cancellationToken) > 0;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"{nameof(RemoveContactInformationToPerson)} : {ex.Message}");
+            }
+
         }
-         
+
     }
 }

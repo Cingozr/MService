@@ -10,6 +10,6 @@ namespace Contact.Service.Command.Delete
 {
     public class DeleteContactCommand : IRequest<bool>
     {
-        public Contacts Contact { get; set; }
+        public Guid ContactId { get; set; }
     }
 }

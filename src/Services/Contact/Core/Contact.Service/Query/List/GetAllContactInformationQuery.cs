@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 namespace Contact.Service.Query.List
 {
     public class GetAllContactInformationQuery : IRequest<List<Contacts>>
-    {
-        public List<Contacts> GetAllContactInformation { get; set; }
+    { 
     }
 }

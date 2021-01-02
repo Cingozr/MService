@@ -1,9 +1,13 @@
+using AutoMapper;
+using Contact.API.Validators;
 using Contact.Core.Repository;
 using Contact.Data.Contexts;
 using Contact.Data.Entities;
 using Contact.Service.Command.Create;
 using Contact.Service.Command.Delete;
 using Contact.Service.Query.List;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -48,6 +52,12 @@ namespace Contact.API
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
             services.AddTransient<IContactRepository, ContactRepository>();
+
+            services.AddAutoMapper(typeof(Startup));
+
+            services.AddMvc().AddFluentValidation();
+            services.AddTransient<IValidator<Contacts>, CreateContactValidator>();
+            services.AddTransient<IValidator<ContactInformations>, CreateContactInformationValidator>();
 
             services.AddTransient<IRequestHandler<CreateContactCommand, bool>, CreateContactCommandHandler>();
             services.AddTransient<IRequestHandler<CreateContactInformationCommand, bool>, CreateContactInformationCommandHandler>();

@@ -9,7 +9,7 @@ namespace Contact.Core.Repository
     public interface IContactRepository
     {
         Task<bool> AddContact(Contacts model, CancellationToken cancellationToken); //Rehberde kişi oluşturma      
-        Task<bool> RemoveContact(Contacts model, CancellationToken cancellationToken);   //Rehberde kişi kaldırma
+        Task<bool> RemoveContact(Guid contactId, CancellationToken cancellationToken);   //Rehberde kişi kaldırma
         Task<bool> AddContactInformationToPerson(ContactInformations model, CancellationToken cancellationToken); //Rehberdeki kişiye iletişim bilgisi ekleme
         Task<bool> RemoveContactInformationToPerson(Guid id, CancellationToken cancellationToken); //Rehberdeki kişiden iletişim bilgisi kaldırma
         Task<List<Contacts>> GetAllContact(CancellationToken cancellationToken); //Rehberdeki kişilerin listelenmesi

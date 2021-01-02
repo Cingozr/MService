@@ -19,7 +19,7 @@ namespace Contact.Service.Command.Delete
 
         public async Task<bool> Handle(DeleteContactCommand request, CancellationToken cancellationToken)
         {
-            return await _contactRepository.RemoveContact(request.Contact, cancellationToken);
+            return await _contactRepository.RemoveContact(request.ContactId, cancellationToken);
         }
     }
 }
