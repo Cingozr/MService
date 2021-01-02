@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\Contact.Core\Contact.Core.csproj" />
     <ProjectReference Include="..\..\Core\Contact.Data\Contact.Data.csproj" />
   </ItemGroup>
 
