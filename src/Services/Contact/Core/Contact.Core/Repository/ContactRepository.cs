@@ -26,12 +26,12 @@ namespace Contact.Core.Repository
         }
 
 
-        public async Task<List<Contacts>> GetContactInformation(CancellationToken cancellationToken)
+        public async Task<List<Contacts>> GetAllContactInformation(CancellationToken cancellationToken)
         {
             return await _contactContext.Contacts.Include(x => x.ContactInformations).ToListAsync(cancellationToken: cancellationToken);
         }
 
-        public async Task<List<Contacts>> ListContacts(CancellationToken cancellationToken)
+        public async Task<List<Contacts>> GetAllContact(CancellationToken cancellationToken)
         {
             return await _contactContext.Contacts.ToListAsync(cancellationToken: cancellationToken);
         }

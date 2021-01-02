@@ -1,5 +1,10 @@
 using Contact.Core.Repository;
 using Contact.Data.Contexts;
+using Contact.Data.Entities;
+using Contact.Service.Command.Create;
+using Contact.Service.Command.Delete;
+using Contact.Service.Query.List;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -13,6 +18,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace Contact.API
@@ -29,6 +35,9 @@ namespace Contact.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHealthChecks();
+            services.AddOptions();
+
             services.AddDbContext<ContactContext>(options => options.UseNpgsql(Configuration.GetConnectionString("Defaultconnection"), b => b.MigrationsAssembly("Contact.Data")));
             services.AddScoped<DbContext>(provider => provider.GetService<ContactContext>());
             services.AddControllers();
@@ -36,9 +45,16 @@ namespace Contact.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Contact.API", Version = "v1" });
             });
-
+            services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
             services.AddTransient<IContactRepository, ContactRepository>();
+
+            services.AddTransient<IRequestHandler<CreateContactCommand, bool>, CreateContactCommandHandler>();
+            services.AddTransient<IRequestHandler<CreateContactInformationCommand, bool>, CreateContactInformationCommandHandler>();
+            services.AddTransient<IRequestHandler<DeleteContactCommand, bool>, DeleteContactCommandHandler>();
+            services.AddTransient<IRequestHandler<DeleteContactInformationCommand, bool>, DeleteContactInformationCommandHandler>();
+            services.AddTransient<IRequestHandler<GetAllContactInformationQuery, List<Contacts>>, GetAllContactInformationQueryHandler>();
+            services.AddTransient<IRequestHandler<GetAllContactQuery, List<Contacts>>, GetAllContactQueryHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,6 +76,7 @@ namespace Contact.API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHealthChecks("/health");
             });
         }
     }
