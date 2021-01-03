@@ -1,10 +1,10 @@
-﻿using Core.Messaging.Options;
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using Report.Data.Entities;
+using Report.Messaging.Options;
 using Report.Service.Services;
 using System.Text;
 using System.Threading;
@@ -21,6 +21,7 @@ namespace Report.Messaging.Receiver
         private readonly string _queueName;
         private readonly string _username;
         private readonly string _password;
+        private readonly int _port;
 
         public AddContactInformationReceiver(
             IContactInformationToPersonService contactInformationService,
@@ -30,6 +31,7 @@ namespace Report.Messaging.Receiver
             _queueName = rabbitMqOptions.Value.QueueName;
             _username = rabbitMqOptions.Value.UserName;
             _password = rabbitMqOptions.Value.Password;
+            _port = rabbitMqOptions.Value.Port;
             _contactInformationService = contactInformationService;
             InitializeRabbitMqListener();
         }
@@ -38,6 +40,7 @@ namespace Report.Messaging.Receiver
         {
             var factory = new ConnectionFactory
             {
+                Port = _port,
                 HostName = _hostname,
                 UserName = _username,
                 Password = _password

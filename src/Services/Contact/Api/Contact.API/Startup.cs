@@ -4,6 +4,7 @@ using Contact.API.Validators;
 using Contact.Core.Repository;
 using Contact.Data.Contexts;
 using Contact.Data.Entities;
+using Contact.Messaging.Options;
 using Contact.Messaging.Sender;
 using Contact.Service.Command.Create;
 using Contact.Service.Command.Delete;
@@ -13,19 +14,13 @@ using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 
 namespace Contact.API
 {
@@ -43,6 +38,8 @@ namespace Contact.API
         {
             services.AddHealthChecks();
             services.AddOptions();
+            var serviceClientSettingsConfig = Configuration.GetSection("RabbitMq");
+            services.Configure<RabbitMqConfiguration>(serviceClientSettingsConfig);
 
             services.AddDbContext<ContactContext>(options => options.UseNpgsql(Configuration.GetConnectionString("Defaultconnection"), b => b.MigrationsAssembly("Contact.Data")));
             services.AddScoped<DbContext>(provider => provider.GetService<ContactContext>());

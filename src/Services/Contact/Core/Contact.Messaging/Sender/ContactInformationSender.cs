@@ -1,5 +1,5 @@
 ﻿using Contact.Data.Entities;
-using Core.Messaging.Options;
+using Contact.Messaging.Options;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
@@ -14,6 +14,7 @@ namespace Contact.Messaging.Sender
         private readonly string _password;
         private readonly string _queueName;
         private readonly string _username;
+        private readonly int _port;
         private IConnection _connection;
 
         public ContactInformationSender(IOptions<RabbitMqConfiguration> rabbitMqOptions)
@@ -22,6 +23,7 @@ namespace Contact.Messaging.Sender
             _hostname = rabbitMqOptions.Value.Hostname;
             _username = rabbitMqOptions.Value.UserName;
             _password = rabbitMqOptions.Value.Password;
+            _port = rabbitMqOptions.Value.Port;
             CreateConnection();
         }
         public void AddContactInformationToPerson(ContactInformations model)
@@ -43,6 +45,7 @@ namespace Contact.Messaging.Sender
             {
                 var factory = new ConnectionFactory
                 {
+                    Port = _port,
                     HostName = _hostname,
                     UserName = _username,
                     Password = _password
