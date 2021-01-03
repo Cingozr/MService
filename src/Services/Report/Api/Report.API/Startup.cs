@@ -62,10 +62,7 @@ namespace Report.API
 
             services.AddTransient<IContactInformationToPersonService, ContactInformationToPersonService>();
 
-            if (serviceClientSettings.Enabled)
-            {
-                services.AddHostedService<AddContactInformationReceiver>();
-            }
+            services.AddHostedService<AddContactInformationReceiver>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
