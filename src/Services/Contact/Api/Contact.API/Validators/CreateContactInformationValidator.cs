@@ -1,13 +1,9 @@
-﻿using Contact.Data.Entities;
+﻿using Contact.API.Models;
 using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Contact.API.Validators
 {
-    public class CreateContactInformationValidator : AbstractValidator<ContactInformations>
+    public class CreateContactInformationValidator : AbstractValidator<CreateContactInformationModel>
     {
         public CreateContactInformationValidator()
         {

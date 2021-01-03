@@ -1,4 +1,5 @@
 using AutoMapper;
+using Contact.API.Models;
 using Contact.API.Validators;
 using Contact.Core.Repository;
 using Contact.Data.Contexts;
@@ -56,8 +57,8 @@ namespace Contact.API
             services.AddAutoMapper(typeof(Startup));
 
             services.AddMvc().AddFluentValidation();
-            services.AddTransient<IValidator<Contacts>, CreateContactValidator>();
-            services.AddTransient<IValidator<ContactInformations>, CreateContactInformationValidator>();
+            services.AddTransient<IValidator<CreateContactModel>, CreateContactValidator>();
+            services.AddTransient<IValidator<CreateContactInformationModel>, CreateContactInformationValidator>();
 
             services.AddTransient<IRequestHandler<CreateContactCommand, bool>, CreateContactCommandHandler>();
             services.AddTransient<IRequestHandler<CreateContactInformationCommand, bool>, CreateContactInformationCommandHandler>();
