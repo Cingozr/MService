@@ -28,6 +28,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\..\Core\Contact.Core\Contact.Core.csproj" />
 		<ProjectReference Include="..\..\Core\Contact.Data\Contact.Data.csproj" />
+		<ProjectReference Include="..\..\Core\Contact.Messaging\Contact.Messaging.csproj" />
 		<ProjectReference Include="..\..\Core\Contact.Service\Contact.Service.csproj" />
 	</ItemGroup>
 

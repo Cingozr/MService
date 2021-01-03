@@ -11,6 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Contact.Core\Contact.Core.csproj" />
     <ProjectReference Include="..\Contact.Data\Contact.Data.csproj" />
+    <ProjectReference Include="..\Contact.Messaging\Contact.Messaging.csproj" />
   </ItemGroup>
 
 </Project>

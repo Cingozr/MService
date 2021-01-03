@@ -4,6 +4,7 @@ using Contact.API.Validators;
 using Contact.Core.Repository;
 using Contact.Data.Contexts;
 using Contact.Data.Entities;
+using Contact.Messaging.Sender;
 using Contact.Service.Command.Create;
 using Contact.Service.Command.Delete;
 using Contact.Service.Query.List;
@@ -59,6 +60,8 @@ namespace Contact.API
             services.AddMvc().AddFluentValidation();
             services.AddTransient<IValidator<CreateContactModel>, CreateContactValidator>();
             services.AddTransient<IValidator<CreateContactInformationModel>, CreateContactInformationValidator>();
+
+            services.AddSingleton<IContactInformationSender, ContactInformationSender>();
 
             services.AddTransient<IRequestHandler<CreateContactCommand, bool>, CreateContactCommandHandler>();
             services.AddTransient<IRequestHandler<CreateContactInformationCommand, bool>, CreateContactInformationCommandHandler>();

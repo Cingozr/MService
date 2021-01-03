@@ -1,4 +1,5 @@
 using AutoMapper;
+using Core.Messaging.Options;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,7 +13,9 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Report.Core.Repository;
 using Report.Data.Contexts;
+using Report.Messaging.Receiver;
 using Report.Service.Query.List;
+using Report.Service.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +38,9 @@ namespace Report.API
         {
             services.AddHealthChecks();
             services.AddOptions();
+            var serviceClientSettingsConfig = Configuration.GetSection("RabbitMq");
+            var serviceClientSettings = serviceClientSettingsConfig.Get<RabbitMqConfiguration>();
+            services.Configure<RabbitMqConfiguration>(serviceClientSettingsConfig);
 
             services.AddDbContext<ReportContext>(options =>
                                                 options.UseNpgsql(Configuration.GetConnectionString("Defaultconnection"),
@@ -57,6 +63,13 @@ namespace Report.API
             services.AddTransient<IReportRepository, ReportRepository>();
 
             services.AddAutoMapper(typeof(Startup));
+
+            services.AddTransient<IContactInformationToPersonService, ContactInformationToPersonService>();
+
+            if (serviceClientSettings.Enabled)
+            {
+                services.AddHostedService<AddContactInformationReceiver>();
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

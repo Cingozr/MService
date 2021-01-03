@@ -32,6 +32,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Report.Core\Report.Core.csproj" />
     <ProjectReference Include="..\..\Core\Report.Data\Report.Data.csproj" />
+    <ProjectReference Include="..\..\Core\Report.Messaging\Report.Messaging.csproj" />
     <ProjectReference Include="..\..\Core\Report.Service\Report.Service.csproj" />
   </ItemGroup>
 
