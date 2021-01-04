@@ -8,11 +8,11 @@ namespace Contact.Core.Repository
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, new()
     {
-        protected readonly ContactContext _contactContext;
+        protected readonly ContactContext ContactContext;
 
         public Repository(ContactContext contactContext)
         {
-            _contactContext = contactContext;
+            ContactContext = contactContext;
         }
 
         public async Task<TEntity> AddAsync(TEntity entity)
@@ -22,8 +22,8 @@ namespace Contact.Core.Repository
 
             try
             {
-                await _contactContext.AddAsync(entity);
-                await _contactContext.SaveChangesAsync();
+                await ContactContext.AddAsync(entity);
+                await ContactContext.SaveChangesAsync();
 
                 return entity;
             }
@@ -40,8 +40,8 @@ namespace Contact.Core.Repository
 
             try
             {
-                _contactContext.Update(entity);
-                await _contactContext.SaveChangesAsync();
+                ContactContext.Update(entity);
+                await ContactContext.SaveChangesAsync();
 
                 return entity;
             }

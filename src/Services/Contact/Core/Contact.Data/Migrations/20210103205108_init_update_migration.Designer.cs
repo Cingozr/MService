@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Contact.Data.Migrations
 {
     [DbContext(typeof(ContactContext))]
-    [Migration("20210102160238_first_migration")]
-    partial class first_migration
+    [Migration("20210103205108_init_update_migration")]
+    partial class init_update_migration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,14 +31,14 @@ namespace Contact.Data.Migrations
                     b.Property<Guid>("ContactId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Info")
+                    b.Property<string>("Detail")
                         .HasColumnType("text");
 
-                    b.Property<string>("InfoDetail")
+                    b.Property<string>("Location")
                         .HasColumnType("text");
 
-                    b.Property<int>("InfoType")
-                        .HasColumnType("integer");
+                    b.Property<string>("Phone")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 

@@ -5,8 +5,9 @@ namespace Report.Data.Entities
     public class ContactInformations
     {
         public int Id { get; set; }
-        public int ContactInformationPK { get; set; }
-        public string Info { get; set; }
+        public string Location { get; set; }
+        public string Phone { get; set; }
+        public string Detail { get; set; }
         public InfoType InfoType { get; set; }
     }
 

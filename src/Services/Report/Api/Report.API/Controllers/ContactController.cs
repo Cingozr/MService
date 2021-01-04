@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Report.Service.Query.List;
@@ -15,11 +14,9 @@ namespace Report.API.Controllers
     [ApiController]
     public class ReportController : ControllerBase
     {
-        private readonly IMapper _mapper;
         private readonly IMediator _mediator;
-        public ReportController(IMapper mapper, IMediator mediator)
+        public ReportController(IMediator mediator)
         {
-            _mapper = mapper;
             _mediator = mediator;
         }
 

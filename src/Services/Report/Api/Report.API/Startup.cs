@@ -1,23 +1,20 @@
-using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Report.Core.Repository;
 using Report.Data.Contexts;
+using Report.Messaging.Options;
+using Report.Messaging.Receiver;
+using Report.Service.Command.Create;
 using Report.Service.Query.List;
-using System;
+using Report.Service.Services;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 
 namespace Report.API
 {
@@ -36,9 +33,11 @@ namespace Report.API
             services.AddHealthChecks();
             services.AddOptions();
 
-            services.AddDbContext<ReportContext>(options =>
-                                                options.UseNpgsql(Configuration.GetConnectionString("Defaultconnection"),
-                                                b => b.MigrationsAssembly("Report.Data")));
+            var serviceClientSettingsConfig = Configuration.GetSection("RabbitMq");
+            var serviceClientSettings = serviceClientSettingsConfig.Get<RabbitMqConfiguration>();
+            services.Configure<RabbitMqConfiguration>(serviceClientSettingsConfig);
+
+            services.AddEntityFrameworkNpgsql().AddDbContext<ReportContext>(options => options.UseNpgsql(Configuration.GetConnectionString("Defaultconnection")));
             services.AddScoped<DbContext>(provider => provider.GetService<ReportContext>());
 
             services.AddControllers();
@@ -46,17 +45,17 @@ namespace Report.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Report.API", Version = "v1" });
             });
+            services.AddMediatR(Assembly.GetExecutingAssembly(), typeof(IContactInformationToPersonService).Assembly);
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<IReportRepository, ReportRepository>();
 
-            services.AddMediatR(Assembly.GetExecutingAssembly());
-            services.AddTransient<IRequestHandler<GetAllCountOfContactRegisteredToLocationQuery, int>,
-                                                  GetAllCountOfContactRegisteredToLocationQueryHandler>();
+            services.AddTransient<IRequestHandler<GetAllCountOfContactRegisteredToLocationQuery, int>, GetAllCountOfContactRegisteredToLocationQueryHandler>();
             services.AddTransient<IRequestHandler<GetAllLocationQuery, List<string>>, GetAllLocationQueryHandler>();
             services.AddTransient<IRequestHandler<GetAllNumbersInLocationQuery, int>, GetAllNumbersInLocationQueryHandler>();
+            services.AddTransient<IRequestHandler<CreateContactInformationCommand, Unit>, CreateContactInformationCommandHandler>();
+            services.AddTransient<IContactInformationToPersonService, ContactInformationToPersonService>();
+            services.AddHostedService<AddContactInformationReceiver>();
 
-            services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
-            services.AddTransient<IReportRepository, ReportRepository>();
-
-            services.AddAutoMapper(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -13,6 +13,23 @@ namespace Report.Core.Repository
     {
         public ReportRepository(ReportContext reportContext) : base(reportContext) { }
 
+        public async Task<bool> AddContactInformationToPerson(ContactInformations model, CancellationToken cancellationToken)
+        {
+            if (model == null)
+                throw new ArgumentNullException($"{nameof(AddContactInformationToPerson)} entity must not be null");
+
+            try
+            {
+                await ReportContext.ContactInformations.AddAsync(model, cancellationToken);
+                return await ReportContext.SaveChangesAsync(cancellationToken) > 0;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"{nameof(model)} could not be saved: {ex.Message}");
+            }
+
+        }
+
         public async Task<int> CountOfContactsRegisteredToLocation(string location, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(location))
@@ -21,7 +38,7 @@ namespace Report.Core.Repository
             try
             {
                 return await ReportContext.ContactInformations
-                    .Where(x => x.InfoType == InfoType.Location && x.Info == location)
+                    .Where(x => x.InfoType == InfoType.Location && x.Location == location)
                     .CountAsync(cancellationToken);
             }
             catch (Exception ex)
@@ -36,7 +53,7 @@ namespace Report.Core.Repository
             {
                 return await ReportContext.ContactInformations
                     .Where(x => x.InfoType == InfoType.Location)
-                    .Select(x => x.Info)
+                    .Select(x => x.Location)
                     .ToListAsync(cancellationToken);
             }
             catch (Exception ex)
