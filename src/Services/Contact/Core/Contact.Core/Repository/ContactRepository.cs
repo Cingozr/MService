@@ -20,8 +20,8 @@ namespace Contact.Core.Repository
 
             try
             {
-                await _contactContext.Contacts.AddAsync(model, cancellationToken);
-                return await _contactContext.SaveChangesAsync(cancellationToken) > 0;
+                await ContactContext.Contacts.AddAsync(model, cancellationToken);
+                return await ContactContext.SaveChangesAsync(cancellationToken) > 0;
             }
             catch (Exception ex)
             {
@@ -37,8 +37,8 @@ namespace Contact.Core.Repository
 
             try
             {
-                await _contactContext.ContactInformations.AddAsync(model, cancellationToken);
-                return await _contactContext.SaveChangesAsync(cancellationToken) > 0;
+                await ContactContext.ContactInformations.AddAsync(model, cancellationToken);
+                return await ContactContext.SaveChangesAsync(cancellationToken) > 0;
             }
             catch (Exception ex)
             {
@@ -51,7 +51,7 @@ namespace Contact.Core.Repository
         {
             try
             {
-                return await _contactContext.Contacts.Include(x => x.ContactInformations).ToListAsync(cancellationToken: cancellationToken);
+                return await ContactContext.Contacts.Include(x => x.ContactInformations).ToListAsync(cancellationToken: cancellationToken);
             }
             catch (Exception ex)
             {
@@ -64,7 +64,7 @@ namespace Contact.Core.Repository
         {
             try
             {
-                return await _contactContext.Contacts.ToListAsync(cancellationToken: cancellationToken);
+                return await ContactContext.Contacts.ToListAsync(cancellationToken: cancellationToken);
             }
             catch (Exception ex)
             {
@@ -80,8 +80,8 @@ namespace Contact.Core.Repository
 
             try
             {
-                _contactContext.Contacts.Remove(await _contactContext.Contacts.FirstOrDefaultAsync(x => x.UUID == contactId, cancellationToken));
-                return await _contactContext.SaveChangesAsync(cancellationToken) > 0;
+                ContactContext.Contacts.Remove(await ContactContext.Contacts.FirstOrDefaultAsync(x => x.UUID == contactId, cancellationToken));
+                return await ContactContext.SaveChangesAsync(cancellationToken) > 0;
             }
             catch (Exception ex)
             {
@@ -97,8 +97,8 @@ namespace Contact.Core.Repository
 
             try
             {
-                _contactContext.ContactInformations.Remove(await _contactContext.ContactInformations.FirstOrDefaultAsync(x => x.ContactId == contactId, cancellationToken));
-                return await _contactContext.SaveChangesAsync(cancellationToken) > 0;
+                ContactContext.ContactInformations.Remove(await ContactContext.ContactInformations.FirstOrDefaultAsync(x => x.ContactId == contactId, cancellationToken));
+                return await ContactContext.SaveChangesAsync(cancellationToken) > 0;
             }
             catch (Exception ex)
             {

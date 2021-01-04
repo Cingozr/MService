@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Contact.Data.Migrations
 {
-    public partial class first_migration : Migration
+    public partial class init_update_migration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,9 +28,9 @@ namespace Contact.Data.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Info = table.Column<string>(type: "text", nullable: true),
-                    InfoType = table.Column<int>(type: "integer", nullable: false),
-                    InfoDetail = table.Column<string>(type: "text", nullable: true),
+                    Location = table.Column<string>(type: "text", nullable: true),
+                    Phone = table.Column<string>(type: "text", nullable: true),
+                    Detail = table.Column<string>(type: "text", nullable: true),
                     ContactId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>

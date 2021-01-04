@@ -7,9 +7,10 @@ namespace Contact.API.Models
 {
     public class CreateContactInformationModel
     {
-        public string Info { get; set; }
+        public string Location { get; set; }
+        public string Phone { get; set; }
+        public string Detail { get; set; }
         public InfoTypeEnumModel InfoType { get; set; }
-        public string InfoDetail { get; set; }
         public Guid ContactId { get; set; }
     }
 }
