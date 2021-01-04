@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Report.Service.Command.Create
 {
-    public class CreateContactInformationCommandHandler : IRequestHandler<CreateContactInformationCommand>
+    public class CreateContactInformationCommandHandler : IRequestHandler<CreateContactInformationCommand, Unit>
     {
         private readonly IReportRepository _reportRepository;
 

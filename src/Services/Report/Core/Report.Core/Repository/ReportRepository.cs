@@ -38,7 +38,7 @@ namespace Report.Core.Repository
             try
             {
                 return await ReportContext.ContactInformations
-                    .Where(x => x.InfoType == InfoType.Location && x.Info == location)
+                    .Where(x => x.InfoType == InfoType.Location && x.Location == location)
                     .CountAsync(cancellationToken);
             }
             catch (Exception ex)
@@ -53,7 +53,7 @@ namespace Report.Core.Repository
             {
                 return await ReportContext.ContactInformations
                     .Where(x => x.InfoType == InfoType.Location)
-                    .Select(x => x.Info)
+                    .Select(x => x.Location)
                     .ToListAsync(cancellationToken);
             }
             catch (Exception ex)

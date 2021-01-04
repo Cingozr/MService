@@ -17,7 +17,7 @@ namespace Report.Messaging.Receiver
         private IModel _channel;
         private IConnection _connection;
         private readonly IContactInformationToPersonService _contactInformationService;
-            private readonly string _hostname;
+        private readonly string _hostname;
         private readonly string _queueName;
         private readonly int _port;
 

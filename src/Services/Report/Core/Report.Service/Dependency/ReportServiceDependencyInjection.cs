@@ -14,16 +14,16 @@ namespace Report.Service.Dependency
 {
     public static class ReportServiceDependencyInjection
     {
-        public static IServiceCollection ReportService(this IServiceCollection services)
-        {
-            services.AddMediatR(Assembly.GetExecutingAssembly());
-            services.AddScoped<IRequestHandler<GetAllCountOfContactRegisteredToLocationQuery, int>, GetAllCountOfContactRegisteredToLocationQueryHandler>();
-            services.AddScoped<IRequestHandler<GetAllLocationQuery, List<string>>, GetAllLocationQueryHandler>();
-            services.AddScoped<IRequestHandler<GetAllNumbersInLocationQuery, int>, GetAllNumbersInLocationQueryHandler>();
-            services.AddScoped<IRequestHandler<CreateContactInformationCommand, Unit>, CreateContactInformationCommandHandler>();
-            services.AddScoped<IContactInformationToPersonService, ContactInformationToPersonService>();
+        //public static IServiceCollection ReportService(this IServiceCollection services)
+        //{
+        //    services.AddMediatR(Assembly.GetExecutingAssembly());
+        //    services.AddScoped<IRequestHandler<GetAllCountOfContactRegisteredToLocationQuery, int>, GetAllCountOfContactRegisteredToLocationQueryHandler>();
+        //    services.AddScoped<IRequestHandler<GetAllLocationQuery, List<string>>, GetAllLocationQueryHandler>();
+        //    services.AddScoped<IRequestHandler<GetAllNumbersInLocationQuery, int>, GetAllNumbersInLocationQueryHandler>();
+        //    services.AddScoped<IRequestHandler<CreateContactInformationCommand, Unit>, CreateContactInformationCommandHandler>();
+        //    services.AddScoped<IContactInformationToPersonService, ContactInformationToPersonService>();
              
-            return services;
-        }
+        //    return services;
+        //}
     }
 }
