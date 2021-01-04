@@ -11,12 +11,12 @@ Microservis çalışması için geliştirdğim projeyi çalıştırabilmek için
 ```
 
 güncellemeyi unutmayın.
-
+***
 Migration Kurulum
 - Projeyi çalıştırmadan önce servislerin veritabanı tablolarını postgresql'e aktarmamız gerekmektedir. Bu işlemler aşağıda sırasıyla anlatılmaktadır.
 
-**1. Contact Service Güncellemesi**
-***
+**1. Contact Service  için Migration Güncellemesi**
+
 - Contact.Api projesini varsayılan yapıyoruz
 - Package Manager Console açıyoruz.
 - Default project olarak Contact.Data projesini seçiyoruz.
