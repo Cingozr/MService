@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Contact.Core.Repository
 {
-    public interface IContactRepository
+    public interface IContactRepository : IRepository<Contacts>
     {
         Task<bool> AddContact(Contacts model, CancellationToken cancellationToken); //Rehberde kişi oluşturma      
         Task<bool> RemoveContact(Guid contactId, CancellationToken cancellationToken);   //Rehberde kişi kaldırma
