@@ -19,18 +19,14 @@ namespace Report.Messaging.Receiver
         private readonly IContactInformationToPersonService _contactInformationService;
         private readonly string _hostname;
         private readonly string _queueName;
-        private readonly string _username;
-        private readonly string _password;
         private readonly int _port;
 
         public AddContactInformationReceiver(
             IContactInformationToPersonService contactInformationService,
             IOptions<RabbitMqConfiguration> rabbitMqOptions)
         {
-            _hostname = rabbitMqOptions.Value.Hostname;
             _queueName = rabbitMqOptions.Value.QueueName;
-            _username = rabbitMqOptions.Value.UserName;
-            _password = rabbitMqOptions.Value.Password;
+            _hostname = rabbitMqOptions.Value.Hostname;
             _port = rabbitMqOptions.Value.Port;
             _contactInformationService = contactInformationService;
             InitializeRabbitMqListener();
@@ -40,10 +36,8 @@ namespace Report.Messaging.Receiver
         {
             var factory = new ConnectionFactory
             {
-                Port = _port,
                 HostName = _hostname,
-                UserName = _username,
-                Password = _password
+                Port = _port,
             };
 
             _connection = factory.CreateConnection();

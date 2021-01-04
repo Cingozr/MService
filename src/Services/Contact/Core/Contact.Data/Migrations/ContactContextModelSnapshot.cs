@@ -29,14 +29,14 @@ namespace Contact.Data.Migrations
                     b.Property<Guid>("ContactId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Info")
+                    b.Property<string>("Detail")
                         .HasColumnType("text");
 
-                    b.Property<string>("InfoDetail")
+                    b.Property<string>("Location")
                         .HasColumnType("text");
 
-                    b.Property<int>("InfoType")
-                        .HasColumnType("integer");
+                    b.Property<string>("Phone")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 

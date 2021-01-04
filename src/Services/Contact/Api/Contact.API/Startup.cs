@@ -42,7 +42,6 @@ namespace Contact.API
             services.Configure<RabbitMqConfiguration>(serviceClientSettingsConfig);
 
             services.AddDbContext<ContactContext>(options => options.UseNpgsql(Configuration.GetConnectionString("Defaultconnection"), b => b.MigrationsAssembly("Contact.Data")));
-            services.AddScoped<DbContext>(provider => provider.GetService<ContactContext>());
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
