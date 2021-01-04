@@ -22,7 +22,13 @@ Migration Kurulum
 - Default project olarak Contact.Data projesini seçiyoruz.
 - Package Manager Console terminaline **Update-Database** yazıyoruz ve Enter tuşuna basıyoruz.
 
-Report servisi için Contac Service güncellemesini uygulayın.
+***
+**2. Report Service  için Migration Güncellemesi**
+
+- Report.Api projesini varsayılan yapıyoruz
+- Package Manager Console açıyoruz.
+- Default project olarak Report.Data projesini seçiyoruz.
+- Package Manager Console terminaline **Update-Database** yazıyoruz ve Enter tuşuna basıyoruz.
 * **
 
 
