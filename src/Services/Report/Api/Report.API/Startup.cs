@@ -37,7 +37,7 @@ namespace Report.API
             var serviceClientSettings = serviceClientSettingsConfig.Get<RabbitMqConfiguration>();
             services.Configure<RabbitMqConfiguration>(serviceClientSettingsConfig);
 
-            services.AddEntityFrameworkNpgsql().AddDbContext<ReportContext>(options => options.UseNpgsql(Configuration.GetConnectionString("Defaultconnection")));
+            services.AddEntityFrameworkNpgsql().AddDbContext<ReportContext>(options => options.UseNpgsql(Configuration.GetConnectionString("Defaultconnection"), b => b.MigrationsAssembly("Report.Data")));
             services.AddScoped<DbContext>(provider => provider.GetService<ReportContext>());
 
             services.AddControllers();
