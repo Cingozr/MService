@@ -5,12 +5,12 @@ Microservis çalışması için geliştirdğim projeyi çalıştırabilmek için
 
 - Docker kurulumunu tamamladıktan sonra mesajlasma servisi olarak kullandığım RabbitMq kurulumu yapmamız gerekmektedir. 
 -  docker run -d --hostname rabbit_mastransit --name rabbit_example -p 8080:15672 -p 8081:5672 rabbitmq:3-management 
-- RabbitMq kurmak için kullandığımız komut satırı kodunda port guncellemesi yapacak olursanız Servislere ait Api katmanında appsetting.json içerisinde 
+- RabbitMq kurmak için  terminale yazdığımız komutta, port guncellemesi yapacak olursanız Servislere ait Api katmanında appsetting.json içerisinde  
+güncellemeyi unutmayın.
 ```json
 "RabbitMq": { "Hostname": "localhost", "Port": "8081", "QueueName": "ContactInformationQueue" } 
 ```
 
-güncellemeyi unutmayın.
 ***
 Migration Kurulum
 - Projeyi çalıştırmadan önce servislerin veritabanı tablolarını postgresql'e aktarmamız gerekmektedir. Bu işlemler aşağıda sırasıyla anlatılmaktadır.
